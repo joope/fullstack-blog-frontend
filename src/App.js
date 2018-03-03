@@ -1,5 +1,6 @@
 import React from 'react'
 import Blog from './components/Blog'
+import LoginForm from './components/LoginForm'
 import blogService from './services/blogs'
 
 class App extends React.Component {
@@ -14,13 +15,19 @@ class App extends React.Component {
     blogService.getAll().then(blogs =>
       this.setState({ blogs })
     )
-  } 
+  }
 
   render() {
+    const {user, blogs} = this.state;
+    const header = user ? <h2>Blogit</h2> : <h2>Kirjaudu sisään</h2>
     return (
       <div>
-        <h2>blogs</h2>
-        {this.state.blogs.map(blog => 
+        { header }
+        { user && 
+          <div>{user.name} logged in</div>
+        }
+        { !user && <LoginForm onLogin={(user) => this.setState({user})}/>}
+        { user && blogs.map(blog => 
           <Blog key={blog._id} blog={blog}/>
         )}
       </div>
