@@ -24,15 +24,10 @@ class LoginForm extends React.Component {
         username: this.state.username,
         password: this.state.password
       })
-  
+      this.props.displayNotification('Kirjauduttiin onnistuneesti sisään')
       this.props.onSuccess(user)
     } catch(exception) {
-      this.setState({
-        error: 'käyttäjätunnus tai salasana virheellinen',
-      })
-      setTimeout(() => {
-        this.setState({ error: null })
-      }, 5000)
+      this.props.displayNotification('Väärä salasana tai tunnus')
     }
   }
   
@@ -40,6 +35,7 @@ class LoginForm extends React.Component {
   render() {
     return(
       <form onSubmit={this.login}>
+      <h2>Kirjaudu sisään</h2>
         <input 
             type="text"
             name="username"

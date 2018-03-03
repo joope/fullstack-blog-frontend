@@ -26,15 +26,10 @@ class BlogForm extends React.Component {
         author: this.state.author,
         url: this.state.url
       })
-  
+      this.props.displayNotification(`Lisättiin uusi blogi '${blog.title}', kirjoittajalta ${blog.author}`)
       this.props.onSuccess(blog)
     } catch(exception) {
-      this.setState({
-        error: 'Virhe luotaessa blogia',
-      })
-      setTimeout(() => {
-        this.setState({ error: null })
-      }, 5000)
+      this.props.displayNotification('Virhe luotaessa blogia')
     }
   }
   
@@ -42,6 +37,7 @@ class BlogForm extends React.Component {
   render() {
     return(
       <form onSubmit={this.post}>
+        <h2>Luo uusi</h2>
         <div>
           <input 
               type="text"
@@ -64,7 +60,7 @@ class BlogForm extends React.Component {
           <input
               type="text"
               name="url"
-              placeholder="Osoite"
+              placeholder="Url"
               value={this.state.url}
               onChange={this.handleLoginFieldChange}
           />
