@@ -6,6 +6,8 @@ const login = async (user) => {
     .post(baseUrl, user)
     .catch((err) => console.log(err))
 
+  window.localStorage.setItem('loggedInUser', JSON.stringify(response.data))
+
   return response.data
 }
 
