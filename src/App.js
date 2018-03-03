@@ -29,10 +29,14 @@ class App extends React.Component {
     this.blogForm.toggleVisibility();
   }
 
-  getBlogs = () => {
-    blogService.getAll().then(blogs =>
-      this.setState({ blogs })
-    )
+  handleLike = (blog) => async () => {
+    await blogService.like(blog)
+    this.getBlogs()
+  }
+
+  getBlogs = async () => {
+    const blogs = await blogService.getAll()
+    this.setState({ blogs })
   }
 
   displayNotification = (notification) => {
@@ -52,8 +56,6 @@ class App extends React.Component {
 
   render() {
     const {user, blogs, notification} = this.state;
-    const header = user ? <h2>Blogit</h2> : <h2>Kirjaudu sisään</h2>
-
 
     const userInfo = user 
       ? <div>
@@ -64,7 +66,7 @@ class App extends React.Component {
 
     const blogList = user 
       ? blogs.map(blog => 
-          <Blog key={blog._id} blog={blog}/>
+          <Blog key={blog._id} blog={blog} onlike={this.handleLike(blog)}/>
       )
       : null
     const blogHeader = user ? <h2>Blogit</h2> : null

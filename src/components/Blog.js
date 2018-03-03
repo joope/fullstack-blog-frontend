@@ -24,19 +24,18 @@ class Blog extends React.Component {
       marginBottom: 5
     }
 
-    const content = this.state.opened
-      ? <div>{title} {author}
+    if (this.state.opened) {
+      return (
+        <div style={blogStyle}>
+          <div onClick={this.toggleOpen}>{title} {author}</div>
           <div>{url}</div>
-          <div>{likes}</div>
+          <div>{likes} <button onClick={this.props.onlike}>Tykkää</button></div>
           <div>Lisäsi: {user && user.name}</div>
         </div>
-      : <div>{title} {author}</div>
-
-    return (
-      <div style={blogStyle} onClick={this.toggleOpen}>
-        {content}
-      </div>  
-    )
+      )
+    }
+    
+    return <div style={blogStyle} onClick={this.toggleOpen}>{title} {author}</div>
   }
 }
 
