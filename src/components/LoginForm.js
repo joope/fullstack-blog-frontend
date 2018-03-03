@@ -7,7 +7,6 @@ class LoginForm extends React.Component {
     this.state = {
       username: '',
       password: '',
-      error: ''
     }
   }
 
@@ -20,10 +19,7 @@ class LoginForm extends React.Component {
   login = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
-        username: this.state.username,
-        password: this.state.password
-      })
+      const user = await loginService.login({...this.state})
       this.props.displayNotification('Kirjauduttiin onnistuneesti sisään')
       this.props.onSuccess(user)
     } catch(exception) {

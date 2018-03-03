@@ -8,7 +8,6 @@ class BlogForm extends React.Component {
       title: '',
       author: '',
       url: '',
-      error: ''
     }
   }
 
@@ -21,10 +20,11 @@ class BlogForm extends React.Component {
   post = async (event) => {
     event.preventDefault()
     try {
-      const blog = await blogService.create({
-        title: this.state.title,
-        author: this.state.author,
-        url: this.state.url
+      const blog = await blogService.create({...this.state})
+      this.setState({
+        title: '',
+        author: '',
+        url: ''
       })
       this.props.displayNotification(`Lisättiin uusi blogi '${blog.title}', kirjoittajalta ${blog.author}`)
       this.props.onSuccess(blog)

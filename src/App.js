@@ -2,6 +2,8 @@ import React from 'react'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
+import Togglable from './components/Togglable'
+
 import blogService from './services/blogs'
 
 class App extends React.Component {
@@ -69,7 +71,11 @@ class App extends React.Component {
         { !user && <LoginForm onSuccess={(user) => this.setState({user})} displayNotification={this.displayNotification}/>}
         { blogHeader }
         { blogList }
-        { user && <BlogForm onSuccess={this.getBlogs} displayNotification={this.displayNotification}/>}
+        { user && 
+          <Togglable buttonLabel='Lisää uusi'>
+            <BlogForm onSuccess={this.getBlogs} displayNotification={this.displayNotification}/>
+          </Togglable>
+        }
       </div>
     );
   }
