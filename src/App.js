@@ -24,6 +24,11 @@ class App extends React.Component {
     }
   }
 
+  handleNewBlog = () => {
+    this.getBlogs();
+    this.blogForm.toggleVisibility();
+  }
+
   getBlogs = () => {
     blogService.getAll().then(blogs =>
       this.setState({ blogs })
@@ -72,8 +77,8 @@ class App extends React.Component {
         { blogHeader }
         { blogList }
         { user && 
-          <Togglable buttonLabel='Lisää uusi'>
-            <BlogForm onSuccess={this.getBlogs} displayNotification={this.displayNotification}/>
+          <Togglable buttonLabel='Lisää uusi' ref={component => this.blogForm = component}>
+            <BlogForm onSuccess={this.handleNewBlog} displayNotification={this.displayNotification}/>
           </Togglable>
         }
       </div>
