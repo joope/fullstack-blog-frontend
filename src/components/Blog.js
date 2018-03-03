@@ -14,8 +14,10 @@ class Blog extends React.Component {
   }
 
   render() {
-    const {title, author, url, likes, user} = this.props.blog
-    if (!title || !author || !url) return null
+    const { showDelete, blog={} } = this.props;
+    const { title, author, url, likes, user } = blog;
+    
+    //if (!title || !author || !url) return null
     const blogStyle = {
       paddingTop: 10,
       paddingLeft: 2,
@@ -31,7 +33,7 @@ class Blog extends React.Component {
           <div>{url}</div>
           <div>{likes} <button onClick={this.props.onlike}>Tykkää</button></div>
           <div>Lisäsi: {user && user.name}</div>
-          <button onClick={this.props.onDelete}>Poista</button>
+          { showDelete && <button onClick={this.props.onDelete}>Poista</button> }
         </div>
       )
     }

@@ -86,6 +86,7 @@ class App extends React.Component {
             blog={blog} 
             onlike={this.handleLike(blog)} 
             onDelete={this.handleBlogDelete(blog)}
+            showDelete={!blog.user || blog.user._id == user.id}
           />
       )
       : null
