@@ -36,8 +36,13 @@ class App extends React.Component {
 
   handleBlogDelete = (blog) => async () => {
     if (window.confirm(`Poistetaanko ${blog.title} ${blog.author}?`)) {
-      await blogService.remove(blog)
-      this.getBlogs()
+      const res = await blogService.remove(blog)
+      if (res.error) {
+        this.displayNotification(res.error)
+      } else {
+        this.getBlogs()
+      }
+      
     }
   }
 
