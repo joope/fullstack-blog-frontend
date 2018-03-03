@@ -34,6 +34,13 @@ class App extends React.Component {
     this.getBlogs()
   }
 
+  handleBlogDelete = (blog) => async () => {
+    if (window.confirm(`Poistetaanko ${blog.title} ${blog.author}?`)) {
+      await blogService.remove(blog)
+      this.getBlogs()
+    }
+  }
+
   getBlogs = async () => {
     let blogs = await blogService.getAll()
     blogs = blogs.sort((a,b) => {
@@ -69,7 +76,12 @@ class App extends React.Component {
 
     const blogList = user 
       ? blogs.map(blog => 
-          <Blog key={blog._id} blog={blog} onlike={this.handleLike(blog)}/>
+          <Blog 
+            key={blog._id} 
+            blog={blog} 
+            onlike={this.handleLike(blog)} 
+            onDelete={this.handleBlogDelete(blog)}
+          />
       )
       : null
     const blogHeader = user ? <h2>Blogit</h2> : null

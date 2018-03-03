@@ -31,6 +31,7 @@ class Blog extends React.Component {
           <div>{url}</div>
           <div>{likes} <button onClick={this.props.onlike}>Tykkää</button></div>
           <div>Lisäsi: {user && user.name}</div>
+          <button onClick={this.props.onDelete}>Poista</button>
         </div>
       )
     }
