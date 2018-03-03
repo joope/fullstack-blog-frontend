@@ -25,7 +25,7 @@ class LoginForm extends React.Component {
         password: this.state.password
       })
   
-      this.props.onLogin(user)
+      this.props.onSuccess(user)
     } catch(exception) {
       this.setState({
         error: 'käyttäjätunnus tai salasana virheellinen',

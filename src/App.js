@@ -1,6 +1,7 @@
 import React from 'react'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
+import BlogForm from './components/BlogForm'
 import blogService from './services/blogs'
 
 class App extends React.Component {
@@ -12,15 +13,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    blogService.getAll().then(blogs =>
-      this.setState({ blogs })
-    )
+    this.getBlogs()
     const userLocalData = window.localStorage.getItem('loggedInUser')
     if (userLocalData) {
       const user = JSON.parse(userLocalData)
       this.setState({user})
       blogService.setToken(user.token)
     }
+  }
+
+  getBlogs = () => {
+    console.log('fetching new')
+    blogService.getAll().then(blogs =>
+      this.setState({ blogs })
+    )
   }
 
   logout = () => {
@@ -44,10 +50,11 @@ class App extends React.Component {
       <div>
         { header }
         { userInfo }
-        { !user && <LoginForm onLogin={(user) => this.setState({user})}/>}
+        { !user && <LoginForm onSuccess={(user) => this.setState({user})}/>}
         { user && blogs.map(blog => 
           <Blog key={blog._id} blog={blog}/>
         )}
+        <BlogForm onSuccess={this.getBlogs}/>
       </div>
     );
   }
