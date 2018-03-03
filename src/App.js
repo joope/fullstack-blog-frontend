@@ -35,7 +35,10 @@ class App extends React.Component {
   }
 
   getBlogs = async () => {
-    const blogs = await blogService.getAll()
+    let blogs = await blogService.getAll()
+    blogs = blogs.sort((a,b) => {
+      return b.likes - a.likes
+    })
     this.setState({ blogs })
   }
 
