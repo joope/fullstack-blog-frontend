@@ -38,7 +38,6 @@ describe.only('Blog', () => {
     )
 
     blogComponent.simulate('click')
-    console.log(blogComponent.debug())
     const titleAndAuthor = blogComponent.find('.blog-main')
     expect(titleAndAuthor.text()).toBe('Tämä on blogi Kirjoittajan Nimi')
 
