@@ -84,9 +84,9 @@ class App extends React.Component {
           <Blog 
             key={blog._id} 
             blog={blog} 
-            onlike={this.handleLike(blog)} 
+            onLike={this.handleLike(blog)} 
             onDelete={this.handleBlogDelete(blog)}
-            showDelete={!blog.user || blog.user._id == user.id}
+            showDelete={!blog.user || blog.user._id == user.id}  //eslint-disable-line
           />
       )
       : null

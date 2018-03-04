@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 class Blog extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +33,7 @@ class Blog extends React.Component {
         <div style={blogStyle}>
           <div onClick={this.toggleOpen}>{title} {author}</div>
           <div>{url}</div>
-          <div>{likes} <button onClick={this.props.onlike}>Tykkää</button></div>
+          <div>{likes} <button onClick={this.props.onLike}>Tykkää</button></div>
           <div>Lisäsi: {user && user.name}</div>
           { showDelete && <button onClick={this.props.onDelete}>Poista</button> }
         </div>
@@ -40,6 +42,12 @@ class Blog extends React.Component {
     
     return <div style={blogStyle} onClick={this.toggleOpen}>{title} {author}</div>
   }
+}
+
+Blog.propTypes = {
+  showDelete: PropTypes.bool,
+  onDelete: PropTypes.func.isRequired,
+  onLike: PropTypes.func.isRequired,
 }
 
 export default Blog

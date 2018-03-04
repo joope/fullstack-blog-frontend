@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import blogService from '../services/blogs'
 
 class BlogForm extends React.Component {
@@ -71,6 +72,11 @@ class BlogForm extends React.Component {
     )
   }
 
+}
+
+BlogForm.propTypes = {
+  onSuccess: PropTypes.func.isRequired,
+  displayNotification: PropTypes.func.isRequired
 }
 
 export default BlogForm

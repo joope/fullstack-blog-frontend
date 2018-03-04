@@ -1,5 +1,6 @@
 import React from 'react'
 import loginService from '../services/login'
+import PropTypes from 'prop-types'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -52,6 +53,11 @@ class LoginForm extends React.Component {
     )
   }
 
+}
+
+LoginForm.propTypes = {
+  onSuccess: PropTypes.func.isRequired,
+  displayNotification: PropTypes.func.isRequired
 }
 
 export default LoginForm
