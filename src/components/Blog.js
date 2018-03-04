@@ -31,11 +31,24 @@ class Blog extends React.Component {
     if (this.state.opened) {
       return (
         <div style={blogStyle}>
-          <div onClick={this.toggleOpen}>{title} {author}</div>
-          <div>{url}</div>
-          <div>{likes} <button onClick={this.props.onLike}>Tykkää</button></div>
-          <div>Lisäsi: {user && user.name}</div>
-          { showDelete && <button onClick={this.props.onDelete}>Poista</button> }
+          <div 
+            className="blog-main"
+            onClick={this.toggleOpen}>{title} {author}
+          </div>
+          <div className="blog-url">{url}</div>
+          <div className="blog-likes">{likes} 
+            <button 
+              className="blog-delete-btn" 
+              onClick={this.props.onLike}>Tykkää
+            </button>
+          </div>
+          <div className="blog-user">Lisäsi: {user && user.name}</div>
+          { showDelete && 
+            <button 
+              className="blog-delete-btn" 
+              onClick={this.props.onDelete}>Poista
+            </button> 
+          }
         </div>
       )
     }

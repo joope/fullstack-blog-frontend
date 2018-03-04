@@ -12,7 +12,7 @@ const blog = {
   },
 }
 
-describe.only('SimpleBlog', () => {
+describe('SimpleBlog', () => {
   it('renders correct content', () => {
 
     const onClick = () => console.log('Clicked button')
